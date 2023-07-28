@@ -75,7 +75,9 @@ const ResponsiveNav = () => {
         >
           <Col xs={20} sm={20} md={4}>
             <div className="logo" style={{ color: "", paddingLeft: "20px" }}>
-              <Image src={logo} alt="Nano Builds" width={100} height={80} />
+              <Link href="/">
+                <Image src={logo} alt="Nano Builds" width={100} height={80} />
+              </Link>
             </div>
           </Col>
           <Col xs={0} sm={0} md={12}>

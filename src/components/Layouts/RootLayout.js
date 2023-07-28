@@ -7,7 +7,7 @@ const RootLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Content>
+      <Content style={{ padding: "0 50px" }}>
         <div
           style={{
             marginTop: "40px",

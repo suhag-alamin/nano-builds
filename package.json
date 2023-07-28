@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.16.0",
+    "antd": "^5.7.3",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "mongodb": "^5.7.0",

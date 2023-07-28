@@ -1,11 +1,9 @@
 import { Layout, theme } from "antd";
+import Link from "next/link";
 import Navbar from "./Navbar";
 const { Content, Footer } = Layout;
 
 const RootLayout = ({ children }) => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   return (
     <>
       <Navbar />
@@ -24,7 +22,10 @@ const RootLayout = ({ children }) => {
           textAlign: "center",
         }}
       >
-        Ant Design ©2023 Created by Ant UED
+        NanoBuilds ©2023 Created by{" "}
+        <Link href="https://suhag.me" target="_blank">
+          Suhag
+        </Link>
       </Footer>
     </>
   );

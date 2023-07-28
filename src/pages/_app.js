@@ -8,12 +8,16 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
-const App = ({ Component, pageProps }) => (
-  <ConfigProvider theme={theme}>
-    <main className={`${roboto.className}`}>
-      <Component {...pageProps} />
-    </main>
-  </ConfigProvider>
-);
+const App = ({ Component, pageProps }) => {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => page);
 
+  return (
+    <ConfigProvider theme={theme}>
+      <div className={`${roboto.className}`}>
+        {getLayout(<Component {...pageProps} />)}
+      </div>
+    </ConfigProvider>
+  );
+};
 export default App;

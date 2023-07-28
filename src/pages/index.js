@@ -1,12 +1,19 @@
+import RootLayout from "@/components/Layouts/RootLayout";
 import Header from "@/lib/Header";
 import { Button } from "antd";
 
-export default function Home() {
+const Home = () => {
   return (
-    <>
+    <div>
       <Header />
-      <h1>hello</h1>
+      <h1>helloasdfsdfsadf</h1>
       <Button type="primary">Button</Button>
-    </>
+    </div>
   );
-}
+};
+
+export default Home;
+
+Home.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
+};

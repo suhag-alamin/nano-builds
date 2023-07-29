@@ -10,6 +10,7 @@ NanoBuilds is a PC building website that allows users to create their own PC.
 
 - Next.js
 - React.js
+- Next Auth
 - MongoDB
 - Node.js
 - Express.js

@@ -85,7 +85,7 @@ const PCBuilder = () => {
       >
         <h1
           style={{
-            fontSize: isMobile ? 24 : 30,
+            fontSize: isMobile ? 20 : 30,
             color: colorPrimary,
             marginBottom: "10px",
           }}
@@ -96,7 +96,7 @@ const PCBuilder = () => {
         <div>
           <h3
             style={{
-              fontSize: isMobile ? 20 : 24,
+              fontSize: isMobile ? 18 : 24,
               color: colorInfo,
               marginBottom: "40px",
             }}
@@ -120,6 +120,8 @@ const PCBuilder = () => {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: 20,
                   }}
                 >
                   <div
@@ -132,12 +134,12 @@ const PCBuilder = () => {
                     <Image
                       src={category?.icon}
                       alt={category?.name}
-                      width={50}
-                      height={50}
+                      width={isMobile ? 30 : 50}
+                      height={isMobile ? 30 : 50}
                     />
                     <h3
                       style={{
-                        fontSize: 16,
+                        fontSize: isMobile ? 12 : 16,
                         textAlign: "center",
                       }}
                     >
@@ -167,6 +169,7 @@ const PCBuilder = () => {
                           justifyContent: "space-between",
                           gap: 14,
                           margin: 20,
+                          flexWrap: "wrap",
                         }}
                       >
                         <div
@@ -179,12 +182,12 @@ const PCBuilder = () => {
                           <Image
                             src={pcComponents?.[category.path]?.image}
                             alt={pcComponents?.[category.path]?.name}
-                            width={40}
-                            height={40}
+                            width={isMobile ? 20 : 40}
+                            height={isMobile ? 20 : 40}
                           />
                           <h3
                             style={{
-                              fontSize: 14,
+                              fontSize: isMobile ? 10 : 14,
                               textAlign: "center",
                             }}
                           >
@@ -196,9 +199,10 @@ const PCBuilder = () => {
                             dispatch(removeFromPc({ category: category.path }))
                           }
                           style={{
-                            backgroundColor: colorError,
+                            backgroundColor: !isMobile && colorError,
+                            fontSize: isMobile ? 10 : 14,
                           }}
-                          type="primary"
+                          type={isMobile ? "text" : "primary"}
                         >
                           Remove
                         </Button>

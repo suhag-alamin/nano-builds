@@ -1,3 +1,4 @@
+import FeaturedCategory from "@/components/Home/FeaturedCategory";
 import FeaturedProducts from "@/components/Home/FeaturedProducts";
 import Hero from "@/components/Home/Hero";
 import RootLayout from "@/components/Layouts/RootLayout";
@@ -36,6 +37,7 @@ const Home = ({ products }) => {
       <main>
         <Hero />
         <FeaturedProducts featuredProducts={featuredProducts} />
+        <FeaturedCategory />
       </main>
     </div>
   );
@@ -48,7 +50,11 @@ Home.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/products");
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://nextjs-ecommerce-psi.vercel.app";
+  const res = await fetch(`${url}/api/products`);
   const products = await res.json();
 
   return {

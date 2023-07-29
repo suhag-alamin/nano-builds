@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
           src={product?.image}
           width={350}
           height={350}
-          responsive
+          layout="responsive"
           alt="news image"
         />
       }

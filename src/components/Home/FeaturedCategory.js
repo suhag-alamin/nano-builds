@@ -1,6 +1,4 @@
 import { Col, Grid, Row } from "antd";
-const { useBreakpoint } = Grid;
-
 import cpu from "@/assets/images/cpu-tower.png";
 import others from "@/assets/images/keyboard-and-mouse.png";
 import monitor from "@/assets/images/monitor.png";
@@ -10,6 +8,8 @@ import ram from "@/assets/images/ram.png";
 import ssd from "@/assets/images/ssd.png";
 import Image from "next/image";
 import Link from "next/link";
+
+const { useBreakpoint } = Grid;
 
 const featuredCategories = [
   {
@@ -89,7 +89,7 @@ const FeaturedCategory = () => {
               span: 6,
             }}
           >
-            <Link href={`/category/${category?.link}`}>
+            <Link href={`/category${category?.link}`}>
               <div
                 style={{
                   display: "flex",

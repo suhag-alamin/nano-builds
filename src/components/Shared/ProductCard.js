@@ -3,7 +3,7 @@ import { Button, Card, Rate, theme } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, children }) => {
   const { Meta } = Card;
 
   const {
@@ -66,9 +66,12 @@ const ProductCard = ({ product }) => {
           : product?.description}
       </p>
 
-      <Button style={{ marginTop: "20px" }} type="primary">
-        <Link href={`/products/${product?._id}`}>Details</Link>
-      </Button>
+      {!children && (
+        <Button style={{ marginTop: "20px" }} type="primary">
+          <Link href={`/products/${product?._id}`}>Details</Link>
+        </Button>
+      )}
+      {children && <div style={{ marginTop: "20px" }}>{children}</div>}
     </Card>
   );
 };

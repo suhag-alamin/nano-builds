@@ -2,12 +2,25 @@ import RootLayout from "@/components/Layouts/RootLayout";
 import ProductCard from "@/components/Shared/ProductCard";
 import Header from "@/lib/Header";
 import { apiLink } from "@/lib/config";
-import { Col, Row } from "antd";
+import { addToPc } from "@/redux/features/pcBuilder/pcBuilderSlice";
+import { Button, Col, Row } from "antd";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
-const SingleCategory = ({ products }) => {
+const ChooseSingleCategory = ({ products }) => {
   const router = useRouter();
   const { category } = router.query;
+
+  const dispatch = useDispatch();
+
+  const handleAddToBuilder = (product) => {
+    const data = {
+      category,
+      product,
+    };
+    dispatch(addToPc(data));
+    router.push("/pc-builder");
+  };
 
   return (
     <div>
@@ -29,7 +42,14 @@ const SingleCategory = ({ products }) => {
               span: 8,
             }}
           >
-            <ProductCard product={product} />
+            <ProductCard product={product}>
+              <Button
+                onClick={() => handleAddToBuilder(product)}
+                type="primary"
+              >
+                Add To Builder
+              </Button>
+            </ProductCard>
           </Col>
         ))}
       </Row>
@@ -37,48 +57,13 @@ const SingleCategory = ({ products }) => {
   );
 };
 
-export default SingleCategory;
+export default ChooseSingleCategory;
 
-SingleCategory.getLayout = function getLayout(page) {
+ChooseSingleCategory.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-export const getStaticPaths = async () => {
-  const categories = [
-    {
-      name: "cpu",
-    },
-    {
-      name: "motherboard",
-    },
-    {
-      name: "ram",
-    },
-    {
-      name: "psu",
-    },
-    {
-      name: "storage",
-    },
-    {
-      name: "monitor",
-    },
-    {
-      name: "others",
-    },
-  ];
-
-  const paths = categories.map((category) => ({
-    params: { category: category.name },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const category = params.category;
 
   const res = await fetch(`${apiLink}/api/products/category/${category}`);

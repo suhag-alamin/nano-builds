@@ -3,6 +3,7 @@ import FeaturedProducts from "@/components/Home/FeaturedProducts";
 import Hero from "@/components/Home/Hero";
 import RootLayout from "@/components/Layouts/RootLayout";
 import Header from "@/lib/Header";
+import { apiLink } from "@/lib/config";
 import { useEffect, useState } from "react";
 
 const Home = ({ products }) => {
@@ -50,11 +51,7 @@ Home.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
-  const url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://nextjs-ecommerce-psi.vercel.app";
-  const res = await fetch(`${url}/api/products`);
+  const res = await fetch(`${apiLink}/api/products`);
   const products = await res.json();
 
   return {

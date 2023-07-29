@@ -11,6 +11,7 @@ import {
   Space,
   theme,
 } from "antd";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -49,6 +50,8 @@ const items = [
 const { Header } = Layout;
 
 const ResponsiveNav = () => {
+  const { data: session } = useSession();
+
   const [visible, setVisible] = useState(false);
 
   const showDrawer = () => {
@@ -60,7 +63,7 @@ const ResponsiveNav = () => {
   };
 
   const {
-    token: { colorInfo },
+    token: { colorInfo, colorError },
   } = theme.useToken();
 
   return (
@@ -101,12 +104,24 @@ const ResponsiveNav = () => {
                 </Button>
               </Menu.Item>
               <Menu.Item key="5">
-                <Button type="primary" style={{ marginRight: "10px" }}>
-                  <Link href="/sign-in">Sign in</Link>
-                </Button>
-                <Button>
-                  <Link href="/sign-up">Sign up</Link>
-                </Button>
+                {session?.user ? (
+                  <Button
+                    type="primary"
+                    style={{ backgroundColor: colorError }}
+                    onClick={() => signOut()}
+                  >
+                    Sign out
+                  </Button>
+                ) : (
+                  <>
+                    <Button type="primary" style={{ marginRight: "10px" }}>
+                      <Link href="/sign-in">Sign in</Link>
+                    </Button>
+                    <Button>
+                      <Link href="/sign-in">Sign up</Link>
+                    </Button>
+                  </>
+                )}
               </Menu.Item>
             </Menu>
           </Col>
@@ -145,12 +160,24 @@ const ResponsiveNav = () => {
               </Button>
             </Menu.Item>
             <Menu.Item onClick={onClose} key="5">
-              <Button type="primary" style={{ marginRight: "10px" }}>
-                <Link href="/sign-in">Sign in</Link>
-              </Button>
-              <Button>
-                <Link href="/sign-up">Sign up</Link>
-              </Button>
+              {session?.user ? (
+                <Button
+                  type="primary"
+                  style={{ backgroundColor: colorError }}
+                  onClick={() => signOut()}
+                >
+                  Sign out
+                </Button>
+              ) : (
+                <>
+                  <Button type="primary" style={{ marginRight: "10px" }}>
+                    <Link href="/sign-in">Sign in</Link>
+                  </Button>
+                  <Button>
+                    <Link href="/sign-in">Sign up</Link>
+                  </Button>
+                </>
+              )}
             </Menu.Item>
           </Menu>
         </Drawer>

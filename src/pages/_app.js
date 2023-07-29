@@ -2,6 +2,7 @@ import store from "@/redux/store";
 import "@/styles/globals.css";
 import theme from "@/theme/themeConfig";
 import { ConfigProvider } from "antd";
+import { SessionProvider } from "next-auth/react";
 import { Roboto } from "next/font/google";
 import { Provider } from "react-redux";
 
@@ -15,13 +16,15 @@ const App = ({ Component, pageProps }) => {
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <Provider store={store}>
-      <ConfigProvider theme={theme}>
-        <div className={`${roboto.className}`}>
-          {getLayout(<Component {...pageProps} />)}
-        </div>
-      </ConfigProvider>
-    </Provider>
+    <SessionProvider session={pageProps.session}>
+      <Provider store={store}>
+        <ConfigProvider theme={theme}>
+          <div className={`${roboto.className}`}>
+            {getLayout(<Component {...pageProps} />)}
+          </div>
+        </ConfigProvider>
+      </Provider>
+    </SessionProvider>
   );
 };
 export default App;
